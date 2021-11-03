@@ -13,6 +13,8 @@ class About(View):
         return render(request, 'customer/about.html')
 
 
+
+
 class Order(View):
     def get(self, request, *args, **kwargs):
         # get every item from each category
@@ -21,11 +23,13 @@ class Order(View):
         deserts = MenuItem.objects.filter(category__name__contains='Deserts')
         drinks = MenuItem.objects.filter(category__name__contains='Drinks')
 
+        print(main_course,starters,deserts,drinks);
+
         # pass into context
         context = {
             'main_course': main_course,
             'starters': starters,
-            'deserts': Deserts,
+            'deserts': deserts,
             'drinks': drinks,
         }
 
