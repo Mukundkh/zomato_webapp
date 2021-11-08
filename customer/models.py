@@ -29,7 +29,7 @@ class OrderModel(models.Model):
     state = models.CharField(max_length=30,blank=True)
     postal_code = models.IntegerField(blank=True,null=True)
     city = models.CharField(max_length=40,blank=True)
-
+    is_paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Order: {self.created_on.strftime("%b %d %I: %M %p")}'
