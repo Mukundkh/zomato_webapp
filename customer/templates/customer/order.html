@@ -2,41 +2,74 @@
 
 {% block content %}
 <div class="container mb-5">
-    <div class="form group pt-3 row mt-4 flex justify-content-center">
+    <form class="form group pt-3 row mt-4 flex justify-content-center">
         <div class="col-md-10 col-sm-12">
             <label for="name">SEARCH</label>
-            <input required class ="form-control" type="text" placeholder="Search Item" name="search" />
+            <input  title="search" class ="form-control" type="text" placeholder="Search Item" name="search" />
         </div>
         <div class="col-md-2 col-sm-12">
-            <button type="button" class="btn btn-light" data-dismiss="modal">SEARCH</button>
+            <button type="submit" class="btn btn-light" data-dismiss="modal">SEARCH</button>
         </div>
-    </div>
+    </form>
     <div class="row justify-content-center mt-1">
         <div class="col-md-12 col-sm-12 p-4">
             <form method="POST">
                 {% csrf_token %}
-                <!-- <div class="pt-5">
-                    {% for app in appetizers %}
-                    <div class="row">
+                <div class="pt-5">
+                    <h2>MAIN COURSE</h2>
+                    {% if main_course.count == 0 %}
+                       <p class="small"> NO MAIN COURSE FOUND</p>
+                   {% endif %}
+                    {% for course in main_course %}
+                    <div class="row mt-4">
                         <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ app.image.url }}" width="150" height="100"/>
+                            <img class="rounded" src="{{ course.image.url }}" width="150" height="100"/>
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="d-flex flex-row">
                                 <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ app.pk }}">
-                                    <label class="form-check-label">{{ app.name }}</label>
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ course.pk }}">
+                                    <label class="form-check-label">{{ course.name }}</label>
                                 </div>
-                                <p class="font-weight-bold pl-5">{{ app.price }}</p>
+                                <p class="font-weight-bold pl-5">{{ course.price }}</p>
                             </div>
-                            <p>{{ app.description }}</p>
+                            <p>{{ course.description }}</p>
                         </div>
                     </div>
                     <hr />
-                {% endfor %}
-                </div> -->
+                    {% endfor %}
+                </div>
+
+                <div class="pt-5">
+                    <h2>DESERTS</h2>
+                    {% if deserts.count == 0 %}
+                       <p class="small"> NO DESERTS FOUND</p>
+                   {% endif %}
+                    {% for desert in deserts %}
+                    <div class="row mt-4">
+                        <div class="col-md-2 col-sm-12">
+                            <img class="rounded" src="{{ desert.image.url }}" width="150" height="100"/>
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ desert.pk }}">
+                                    <label class="form-check-label">{{ desert.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">{{ desert.price }}</p>
+                            </div>
+                            <p>{{ desert.description }}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                </div>
+
                 <div class="pt-5">
                     <h2>STARTERS</h2>
+                    {% if starters.count == 0 %}
+                       <p class="small"> NO STARTERS FOUND</p>
+                   {% endif %}
                     {% for starter in starters %}
                     <div class="row mt-4">
                         <div class="col-md-2 col-sm-12">
@@ -59,6 +92,9 @@
 
                 <div class="pt-5">
                     <h2>DRINKS</h2>
+                    {% if drinks.count == 0 %}
+                       <p class="small"> NO DRINKS FOUND</p>
+                   {% endif %}
                     {% for drink in drinks %}
                     <div class="row mt-4">
                         <div class="col-md-2 col-sm-12">
