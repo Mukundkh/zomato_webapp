@@ -1,0 +1,15 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+   {{ name }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ name }}</h1>
+<h2>{{ description }}</h2>
+
+{% comment %} <p> This restaurant has address {{address}}</p>
+<p> Phone number is {{phone}}</p>
+<p> The opening time is {{open_time}} and closing time is {{close_time}}</p> {% endcomment %}
+
+{% endblock %}
