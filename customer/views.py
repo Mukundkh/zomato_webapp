@@ -38,7 +38,6 @@ class Order(View):
             'deserts': deserts,
             'drinks': drinks,
         }
-
         # render the template
         return render(request, 'customer/order.html', context)
 
@@ -132,17 +131,19 @@ class OrderPayConfirmation(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/order_pay_confirmation.html')
 
+
 class Menu(View):
     def get(self, request, *args, **kwargs):
         menu_items = MenuItem.objects.all()
 
         context = {
-            'menu_items' : menu_items
+            'menu_items': menu_items
         }
-        return render(request,'customer/menu.html',context)
+        return render(request, 'customer/menu.html', context)
+
 
 class MenuSearch(View):
-    def get(self, request, *args , **kwargs):
+    def get(self, request, *args, **kwargs):
         query = self.request.GET.get("q")
         menu_items = MenuItem.objects.filter(
             Q(name__icontains=query) |
@@ -151,9 +152,7 @@ class MenuSearch(View):
 
         )
         context = {
-            'menu_items' : menu_items
+            'menu_items': menu_items
         }
 
-        return render(request,'customer/menu.html',context)
-
-
+        return render(request, 'customer/menu.html', context)

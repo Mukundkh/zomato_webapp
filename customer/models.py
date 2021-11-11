@@ -1,5 +1,5 @@
 from django.db import models
-from restaurant.models import res_name, restaurant_model
+from restaurant.models import restaurant_model
 
 
 class MenuItem(models.Model):
@@ -9,7 +9,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ManyToManyField('Category', related_name='item')
     # add restaurant id
-    restaurant = models.ManyToManyField(restaurant_model, related_name='item')
+    restaurant = models.ForeignKey(restaurant_model, on_delete=models.CASCADE, default=3)
 
     def __str__(self):
         return self.name
