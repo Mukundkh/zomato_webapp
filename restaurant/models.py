@@ -13,3 +13,9 @@ class restaurant_model(models.Model):
     def __str__(self):
         return self.name
 
+class res_name(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
