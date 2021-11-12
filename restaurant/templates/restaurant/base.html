@@ -8,8 +8,8 @@
   <body>
     {% block content %} {% endblock %}
   </body>
-</html> {% endcomment %}
-
+</html>
+{% endcomment %}
 
 <!DOCTYPE html>
 <html>
@@ -47,8 +47,7 @@
   </head>
   <body>
     {% include 'customer/navigation.html' %} 
-    {% block content %} 
-    {% endblock content %}
+    {% block content %} {% endblock content %} 
     {% include 'customer/footer.html' %}
     <!-- JQuery -->
     <script

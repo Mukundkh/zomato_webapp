@@ -9,7 +9,8 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ManyToManyField('Category', related_name='item')
     # add restaurant id
-    restaurant = models.ForeignKey(restaurant_model, on_delete=models.CASCADE, default=3)
+    restaurant = models.ForeignKey(
+        restaurant_model, on_delete=models.CASCADE, default=3)
 
     def __str__(self):
         return self.name

@@ -14,24 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from customer.views import Index, About, Order, OrderConfirmation, OrderPayConfirmation, Menu, MenuSearch
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/',include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('user_reg', include('login_page.urls')),
     path('', Index.as_view(), name='index'),
     path('about/', About.as_view(), name='about'),
-    path('menu/',Menu.as_view(),name='menu'),
-    path('menu/search/',MenuSearch.as_view(),name='menu-search'), 
+    path('menu/', Menu.as_view(), name='menu'),
+    path('menu/search/', MenuSearch.as_view(), name='menu-search'),
     path('order/', Order.as_view(), name='order'),
-    path('order-confirmation/<int:pk>',OrderConfirmation.as_view(),name='order-confirmation'),
-    path('payment-confirmation/',OrderPayConfirmation.as_view(),name='payment-confirmation'),
-    path("restaurant/",include('restaurant.urls')),
+    path('order-confirmation/<int:pk>',
+         OrderConfirmation.as_view(), name='order-confirmation'),
+    path('payment-confirmation/', OrderPayConfirmation.as_view(),
+         name='payment-confirmation'),
+    path("restaurant/", include('restaurant.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
- 

@@ -36,7 +36,7 @@ class Order(View):
             'main_course': main_course,
             'starters': starters,
             'deserts': deserts,
-            'drinks': drinks,
+            'drin ks': drinks,
         }
         # render the template
         return render(request, 'customer/order.html', context)
