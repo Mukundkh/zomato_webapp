@@ -22,6 +22,7 @@ from customer.views import Index, About, Order, OrderConfirmation, OrderPayConfi
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('res/', include('restaurant_dash.urls')),
     path('user_reg', include('login_page.urls')),
     path('', Index.as_view(), name='index'),
     path('about/', About.as_view(), name='about'),
