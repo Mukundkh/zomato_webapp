@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'customer',
     'restaurant',
     'restaurant_dash',
+    'users',
 
     'crispy_forms',
     'allauth',
@@ -155,5 +156,8 @@ ACCOUNT_ADAPTER = 'restaurant_dash.account_adapter.NoNewUsersAccountAdapter'
 LOGIN_REDIRECT_URL = 'dashboard'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'index'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

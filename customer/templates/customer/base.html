@@ -39,6 +39,16 @@
     {% block content %} 
     {% endblock content %} 
     {% include 'customer/footer.html' %}
+    <div class="row">
+      <div class="col-md-8">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags  }}">
+        {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
     <!-- JQuery -->
     <script
       type="text/javascript"
