@@ -89,13 +89,13 @@ class Order(View):
                 f'Your total: {price}\n'
                 'Thank you again for your order')
 
-        send_mail(
-            'Thank you for your order',
-            body,
-            'example@example.com',
-            [email],
-            fail_silently=False
-        )
+        # send_mail(
+        #     'Thank you for your order',
+        #     body,
+        #     'example@example.com',
+        #     [email],
+        #     fail_silently=False
+        # )
 
         context = {
             'items': order_items['items'],

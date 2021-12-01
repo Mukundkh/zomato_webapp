@@ -5,6 +5,55 @@ from django.core.mail import send_mail
 from customer.models import MenuItem, OrderModel
 from django.views import View
 
+#adding required libraries for rest
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ContactSerializer
+
+@api_view(['GET','POST'])
+def restaurant_res(request):
+    if request.method == 'GET':
+        restaurants = restaurant_model.objects.all()
+        serializer = ContactSerializer(restaurants, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = ContactSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','PUT','DELETE'])
+def restaurant_res_by_key(request, pk):
+    try:
+        restaurants = restaurant_model.objects.get(pk=pk)
+    except restaurant_model.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = ContactSerializer(restaurants)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = ContactSerializer(restaurants, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        restaurants.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+
+
 # Create your views here.
 
 
@@ -13,7 +62,6 @@ def index(request):
     return render(request, 'restaurant/index.html', {
         "rest": rest
     })
-
 
 class restaurant_detail(View):
     def get(self, request, *args, **kwargs):
