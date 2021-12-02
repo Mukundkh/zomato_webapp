@@ -4,6 +4,106 @@ from django.db.models import Q
 from .models import MenuItem, Category, OrderModel
 from django.core.mail import send_mail
 
+#adding various apis
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import MenuItemSerializer, OrderModelSerializer
+
+@api_view(['GET','POST'])
+def menu_list(request):
+    if request.method == 'GET':
+        menus = MenuItem.objects.all()
+        serializer = MenuItemSerializer(menus, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = MenuItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','PUT','DELETE','PATCH'])
+def customer_by_key(request, pk):
+    try:
+        menus = MenuItem.objects.get(pk=pk)
+    except MenuItem.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = MenuItemSerializer(menus)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = MenuItemSerializer(menus, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'PATCH':
+        serializer = MenuItemSerializer(menus, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        menus.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#Order item apis  OrderModel
+
+@api_view(['GET','POST'])
+def order_list(request):
+    if request.method == 'GET':
+        orders = OrderModel.objects.all()
+        serializer = OrderModelSerializer(orders, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = OrderModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','PUT','DELETE','PATCH'])
+def order_by_key(request, pk):
+    try:
+        orders = OrderModel.objects.get(pk=pk)
+    except OrderModel.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = OrderModelSerializer(orders)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = OrderModelSerializer(orders, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'PATCH':
+        serializer = OrderModelSerializer(orders, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        orders.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
 
 class Index(View):
     def get(self, request, *args, **kwargs):
