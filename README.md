@@ -1,1 +1,1 @@
-# zomato_webapp with django rest framework
+# zomato_webapp
