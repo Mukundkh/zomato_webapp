@@ -1,1 +1,1 @@
-web: gunicorn food_delivery.wsgi --log-file -
+web: waitress-server --port=$PORT food_delivery.wsgi:application
